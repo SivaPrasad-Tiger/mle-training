@@ -1,0 +1,12 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# CSV files
+*.csv
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# VSCode specific files
+.vscode/
