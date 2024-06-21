@@ -16,3 +16,12 @@ The following techniques have been used:
 
 ## To excute the script
 python < scriptname.py >
+
+# Project Description
+This project is for training on Git and GitHub collaboration.
+
+## Setup Instructions
+
+### Create Environment
+```bash
+conda env create -f env.yml
