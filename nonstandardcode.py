@@ -9,7 +9,7 @@ from scipy.stats import randint
 from six.moves import urllib
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.impute import SimpleImputer
-from sklearn.linear_model import LinearRegression
+from sklearn.linearRegression import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 from sklearn.model_selection import (
     GridSearchCV,
@@ -36,7 +36,6 @@ def fetch_housing_data(housing_url=HOUSING_URL, housing_path=HOUSING_PATH):
 def load_housing_data(housing_path=HOUSING_PATH):
     csv_path = os.path.join(housing_path, "housing.csv")
     return pd.read_csv(csv_path)
-
 
 fetch_housing_data()
 housing = load_housing_data()
@@ -78,8 +77,6 @@ for set_ in (strat_train_set, strat_test_set):
     set_.drop("income_cat", axis=1, inplace=True)
 
 housing = strat_train_set.copy()
-housing.plot(kind="scatter", x="longitude", y="latitude")
-housing.plot(kind="scatter", x="longitude", y="latitude", alpha=0.1)
 
 housing_numeric = housing.select_dtypes(include=[float, int])
 corr_matrix = housing_numeric.corr()
@@ -115,9 +112,9 @@ housing_prepared = housing_tr.join(
     pd.get_dummies(housing_cat, drop_first=True)
 )
 
-
 lin_reg = LinearRegression()
 lin_reg.fit(housing_prepared, housing_labels)
+
 housing_predictions = lin_reg.predict(housing_prepared)
 lin_mse = mean_squared_error(housing_labels, housing_predictions)
 lin_rmse = np.sqrt(lin_mse)
@@ -205,4 +202,5 @@ final_rmse = np.sqrt(final_mse)
 final_predictions = final_model.predict(X_test_prepared)
 final_mse = mean_squared_error(y_test, final_predictions)
 final_rmse = np.sqrt(final_mse)
+
 
