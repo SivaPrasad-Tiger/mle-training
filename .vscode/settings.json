@@ -1,0 +1,33 @@
+{
+    "python.pythonPath": "C:\Users\SIVA PRASAD\Downloads\mle-training-0.1\mle-training-0.1\nonstandardcode.py",
+    "editor.formatOnSave": true,
+    "python.sortImports.args": [
+      "--profile",
+      "black"
+    ],
+    "python.formatting.blackArgs": [
+      "--line-length",
+      "88"
+    ],
+    "python.linting.flake8Args": [
+      "--max-line-length=88"
+    ],
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
+  }
+  
+  {
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true,
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "files.trimTrailingWhitespace": true,
+    "python.formatting.provider": "black",
+    "python.sortImports.path": "isort",
+    "python.sortImports.args": [
+      "--profile",
+      "black"
+    ],
+    "isort.check": true
+  }
