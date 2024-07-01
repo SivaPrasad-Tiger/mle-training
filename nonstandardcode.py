@@ -5,6 +5,7 @@ import tarfile
 
 import numpy as np
 import pandas as pd
+
 from scipy.stats import randint
 from six.moves import urllib
 from sklearn.ensemble import RandomForestRegressor
@@ -36,6 +37,7 @@ def fetch_housing_data(housing_url=HOUSING_URL, housing_path=HOUSING_PATH):
 def load_housing_data(housing_path=HOUSING_PATH):
     csv_path = os.path.join(housing_path, "housing.csv")
     return pd.read_csv(csv_path)
+
 
 fetch_housing_data()
 housing = load_housing_data()
@@ -82,6 +84,7 @@ housing_numeric = housing.select_dtypes(include=[float, int])
 corr_matrix = housing_numeric.corr()
 corr_matrix["median_house_value"].sort_values(ascending=False)
 
+
 housing["rooms_per_household"] = housing["total_rooms"] / housing["households"]
 housing["bedrooms_per_room"] = (
     housing["total_bedrooms"] / housing["total_rooms"]
@@ -99,6 +102,8 @@ X = imputer.transform(housing_num)
 housing_tr = pd.DataFrame(X, columns=housing_num.columns, index=housing.index)
 housing_tr["rooms_per_household"] = (
     housing_tr["total_rooms"] / housing_tr["households"]
+
+
 )
 housing_tr["bedrooms_per_room"] = (
     housing_tr["total_bedrooms"] / housing_tr["total_rooms"]
@@ -108,9 +113,10 @@ housing_tr["population_per_household"] = (
 )
 
 housing_cat = housing[["ocean_proximity"]]
+
 housing_prepared = housing_tr.join(
     pd.get_dummies(housing_cat, drop_first=True)
-)
+
 
 lin_reg = LinearRegression()
 lin_reg.fit(housing_prepared, housing_labels)
@@ -150,11 +156,15 @@ for mean_score, params in zip(cvres["mean_test_score"], cvres["params"]):
     print(np.sqrt(-mean_score), params)
 
 param_grid = [
+
     {"n_estimators": [3, 10, 30], "max_features": [2, 4, 6, 8]},
+
+
     {"bootstrap": [False], "n_estimators": [3, 10], "max_features": [2, 3, 4]},
 ]
 
 forest_reg = RandomForestRegressor(random_state=42)
+
 grid_search = GridSearchCV(
     forest_reg,
     param_grid,
@@ -192,8 +202,10 @@ X_test_prepared["population_per_household"] = (
 )
 
 X_test_cat = X_test[["ocean_proximity"]]
+
 X_test_prepared = X_test_prepared.join(
     pd.get_dummies(X_test_cat, drop_first=True)
+
 )
 
 final_predictions = final_model.predict(X_test_prepared)
